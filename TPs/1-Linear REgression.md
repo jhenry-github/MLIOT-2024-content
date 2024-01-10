@@ -58,7 +58,7 @@ Pandas is great to manipulate tables that will look like excell spreadsheets, al
 
 Pyplot, in the matplotlib set of libraries, is great to plot simple graphs.
 
-Next, you will need data, in this same folder, download the unconv_MV_v5.csv file. Modify the path to access the file, I am using below my own settings.
+Next, you will need data, in this same folder, download the [unconv_MV_v5.csv file](https://github.com/jhenry-github/MLIOT-2024-content/blob/main/TPs/unconv_MV_v5.csv). Modify the path to access the file, I am using below my own settings.
 
 You then want to import the training set as a pandas dataframe (we give it the shot name df).
 
