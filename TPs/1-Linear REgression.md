@@ -10,9 +10,9 @@ Once Anaconda is installed, click Home, and launch Jupyter Lab.
 
 Jupyter comes in two flavors, Notebook and Lab. Notebook is the older version, and much of the new features are developped for the Lab version first, so Lab is better, especially if you want to share data (images, datasets etc.) between notebooks. However, it is okay if you decide to run Notebook instead of Lab.
 
-At its core, Jupyter allows you to take notes in some blocks, and execute what is then seen as code in other blocks. When you are in a block, you can see at the tope that the content is expected to be code by default. Switch to markdown to see the difference.
+At its core, Jupyter allows you to take notes in some blocks, and execute what is then seen as code in other blocks. When you are in a block, you can see at the top that the content is expected to be coded by default. Switch to markdown to see the difference.
 
-When you have a block that is code, you can execute it in two ways: one is Shift + Enter, to directly execute the code (then move to the next block if it exists, or create a new block if the block you exectue is the last one in the page). Another one is Option + Enter (on Mac, and Alt + Enter on Windows/Linux), to execute the code and insert a new block right after (which is useful if you execute a block somewhere in the middle of the page, and you want to insert a new block right after, before the next one). Note that just pressing 'Enter' moves you to the next line in the same block.
+When you have a block that is code, you can execute it in two ways: one is Shift + Enter, to directly execute the code (then move to the next block if it exists, or create a new block if the block you execute is the last one in the page). Another one is Option + Enter (on Mac, and Alt + Enter on Windows/Linux), to execute the code and insert a new block right after (which is useful if you execute a block somewhere in the middle of the page, and you want to insert a new block right after, before the next one). Note that just pressing 'Enter' moves you to the next line in the same block.
 
 Try it! In the first block, type:
 
@@ -26,11 +26,11 @@ Now type Shift + Enter. You should see the text below the block. Jupyter display
 
 In the block below, type "this is a test" and press Shift + Enter.
 
-The system should output a syntax error, as what you typed is not an interpretable Python code. Go back to that block, and set its type at the top of the page to Markdown. Press Shift Enter. This time the text should appear as text, outside of a block. THis type of functionality is very useful to anotate around the commands. My suggestion: use it extensively! In 6 months, you will have no memory of what this notebook was about, or what this or that command was intended to achieve. Documenting and taking note extensively will look laborious at first, but you will thank yourself in the future when you will come back to that same notebook. Even things that seem obvious (like 'this variable is for XYZ purpose') will be immensely useful, once you will have forgotten the context of the notebook. It is easier to skip some notes that you do not need to read (because you remember enough), than stare for hours to a block which purpose you can't figure out anymore.
+The system should output a syntax error, as what you typed is not an interpretable Python code. Go back to that block, and set its type at the top of the page to Markdown. Press Shift Enter. This time the text should appear as text, outside of a block. This type of functionality is very useful to anotate around the commands. My suggestion: use it extensively! In 6 months, you will have no memory of what this notebook was about, or what this or that command was intended to achieve. Documenting and taking note extensively will look laborious at first, but you will thank yourself in the future when you will come back to that same notebook. Even things that seem obvious (like 'this variable is for XYZ purpose') will be immensely useful, once you will have forgotten the context of the notebook. It is easier to skip some notes that you do not need to read (because you remember enough), than stare for hours to a block which purpose you can't figure out anymore.
 
-Go back to the Hello World block (click inside the block). This time, type Option+Enter (or Alt+Enter). You should see that the command executes again, but also creates a new empty blcok before your markdown notes. In this empty blck, you can insert more notes or run more code without having to move what is below.
+Go back to the Hello World block (click inside the block). This time, type Option+Enter (or Alt+Enter). You should see that the command executes again, but also creates a new empty blcok before your markdown notes. In this empty block, you can insert more notes or run more code without having to move what is below.
 
-Go back to the Hello World block. After the command, add some text after the pound signe, for example:
+Go back to the Hello World block. After the command, add some text after the pound sign, for example:
 
 ```shell
 print('hello world') # this is just a test
@@ -54,19 +54,19 @@ should be selected by default. On the right panel, select All (instead of Instal
 
 Numpy is a great library to manipulate numbers. As we do not want to call 'numpy this' or 'numpy that' every time we call a numpy function, we tell Python that we will use the shorthand 'np'.
 
-Pandas is great to manipulate tables that will look like excell spreadsheets, allowing table-wise, row-wise or column-wise fast operations.
+Pandas is great to manipulate tables that will look like excel spreadsheets, allowing table-wise, row-wise or column-wise fast operations.
 
 Pyplot, in the matplotlib set of libraries, is great to plot simple graphs.
 
 Next, you will need data, in this same folder, download the [unconv_MV_v5.csv file](https://github.com/jhenry-github/MLIOT-2024-content/blob/main/TPs/unconv_MV_v5.csv). Modify the path to access the file, I am using below my own settings.
 
-You then want to import the training set as a pandas dataframe (we give it the shot name df).
+You then want to import the training set as a pandas dataframe (we give it the short name df).
 
 ```shell
 df = pd.read_csv('/Users/jerhenry/Documents/Perso/IMT/IMT_ML_IoT/unconv_MV_v5.csv');
 ```
 
-Note the semi-colon sign at the end of the lie, that tells Python to complet the command without outputting the result.
+Note the semi-colon sign at the end of the line, that tells Python to complete the command without outputting the result.
 
 When importing data, first good step is to look at the data. When it is a dataframe, looking at the first few lines will give you an idea of the column names, and of the first few values:
 
@@ -103,7 +103,7 @@ We also want to extract the lentgh of these vectors, so we can run the loop on a
 n = len(df[['Por']])
 ```
 
-Now, to run gradient descent, we need change the variables theta0 and theta1 until we find convergence. But these variables need to start from some value.So we pick up two initial values for theta0 and theta1. You could use random values, but it is common to start with 0s:
+Now, to run gradient descent, we need to change the variables theta0 and theta1 until we find convergence. But these variables need to start from some value. So we pick up two initial values for theta0 and theta1. You could use random values, but it is common to start with 0s:
 
 ```shell
 th0_curr = th1_curr = 0
@@ -115,21 +115,21 @@ We also need to decide how many times we will try to explore new values, which m
 iterations = 1000
 ```
 
-Then, we need to decide by how much we change theta0 and theta1, for now let's use a fixed number, something small. Here again, this is just a first attemtp, you will likley have to try a few numbers.
+Then, we need to decide by how much we change theta0 and theta1, for now let's use a fixed number, something small. Here again, this is just a first attempt, you will likely have to try a few numbers.
 
 ```shell
 learning_rate = 0.02
 ```
 
-It is now time to run gradient descient. We are going to run a loop 'iteration' times (above, 1000). Each time, we are going to pick one value from x (Por), compute with our theta0 and theta1 the expected matching y value (with the operation we saw in class, y_predicted = th1_curr * x + th0_curr), then we are going to comapre that predicted y to the real y matching the x value in the Prod column. That difference is the cost (y - y_predicted). We are going to run this operation column-wise, i.e., we do it for all values in x and y, and the cost is the sum of all these differences (thus 'sum' in the dth0 and dth1 below). 
+It is now time to run gradient descent. We are going to run a loop 'iteration' times (above, 1000). Each time, we are going to pick one value from x (Por), compute with our theta0 and theta1 the expected matching y value (with the operation we saw in class, y_predicted = th1_curr * x + th0_curr), then we are going to compare that predicted y to the real y matching the x value in the Prod column. That difference is the cost (y - y_predicted). We are going to run this operation column-wise, i.e., we do it for all values in x and y, and the cost is the sum of all these differences (thus 'sum' in the dth0 and dth1 below). 
 
-Then, we are going to use this cost to decide how we want to change theta0 and theta1 for the next iteration. We are going to compute the derivative of theta1 and the derivative of theta0. The derivative is the slope, which tells us if the curve at this point is going downward or upward. You may remember from the class that the ideal slope is flat, i.e., slope is 0, which means that at this point the prediction is as close as it can be to the real y value. So if our derivative is negative, the curve is going downward and we want tp continue toward the flat zone (so theta0 and theat1 should be positive in next iteration). If the derivative is positive, we are climbing away from the flat area, and we want to go bacward (theta1 or theta0, whichever derivative you got positive), should be negative in next round.
+Then, we are going to use this cost to decide how we want to change theta0 and theta1 for the next iteration. We are going to compute the derivative of theta1 and the derivative of theta0. The derivative is the slope, which tells us if the curve at this point is going downward or upward. You may remember from the class that the ideal slope is flat, i.e., slope is 0, which means that at this point the prediction is as close as it can be to the real y value. So if our derivative is negative, the curve is going downward and we want to continue toward the flat zone (so theta0 and theat1 should be positive in next iteration). If the derivative is positive, we are climbing away from the flat area, and we want to go backward (theta1 or theta0, whichever derivative you got positive), should be negative in next round.
 
 Think about it at the comparison level. If the difference between the real y and the predicted y is positive (y is larger than y-predicted), then we need y-predicted to be a bit bigger, so we need theta1 and theta0 to be a bit larger, and vice versa. 
 
-So there a re a few ways to achieve this. The derivative gives us a negative number for dth1 and dth0 (go back to the class material if you forgot how it is computed). So, taking dth0 as an example, if dth0 is negative (y is larger than y-predicted), then we want theta0 to be a bit larger, so we compute the next theta0 as the previous theta0 minus dth0 (as dth0 is negative, the new theta0 is bigger than the previous one). In fact, we could do something simpler, which is look at the difference (y minus y_predicted), then add something, for example our learning rate value, if the difference is positive (-> we want to increase y_predicted, so we want to increase theta0). If the difference is negative, remove the value of the learning rate, and change theta0/theta1 that way, at the 'learning rate' pace, for each iteration. We kinda do that, but we want to be a bit more clever. By multiplying the learning rate by the derivative, we make the change big if the derivative is big (i.e., the slope is stiff, and we are far from the 'flat' area). But if the derivative gets small, the change gets smaller too (so we slow down as we approach the flat area of the curve, to make sure 'not' to miss the minimum).
+So there are a few ways to achieve this. The derivative gives us a negative number for dth1 and dth0 (go back to the class material if you forgot how it is computed). So, taking dth0 as an example, if dth0 is negative (y is larger than y-predicted), then we want theta0 to be a bit larger, so we compute the next theta0 as the previous theta0 minus dth0 (as dth0 is negative, the new theta0 is bigger than the previous one). In fact, we could do something simpler, which is look at the difference (y minus y_predicted), then add something, for example our learning rate value, if the difference is positive (-> we want to increase y_predicted, so we want to increase theta0). If the difference is negative, remove the value of the learning rate, and change theta0/theta1 that way, at the 'learning rate' pace, for each iteration. We kinda do that, but we want to be a bit more clever. By multiplying the learning rate by the derivative, we make the change big if the derivative is big (i.e., the slope is stiff, and we are far from the 'flat' area). But if the derivative gets small, the change gets smaller too (so we slow down as we approach the flat area of the curve, to make sure 'not' to miss the minimum).
 
-We could run the loop this way, but then we would be missing a lot, as we would only get the result. It is nicer to see what happens, so at each iteration, we are going to compute and display the total cost, so we can track it, and verify that it is going down. It will not get to 0 (as you saw above that the poitns show a general linear tentency, but they are not all on a single line), but it should get lower from the first to the last iteration. We are also going to dispaly the iteration number, and the valus of theta0 and theta1 at thsi point. Lets do it:
+We could run the loop this way, but then we would be missing a lot, as we would only get the result. It is nicer to see what happens, so at each iteration, we are going to compute and display the total cost, so we can track it, and verify that it is going down. It will not get to 0 (as you saw above that the points show a general linear tendency, but they are not all on a single line), but it should get lower from the first to the last iteration. We are also going to dispaly the iteration number, and the values of theta0 and theta1 at this point. Let's do it:
 
 ```shell
 for i in range(iterations):
@@ -149,7 +149,7 @@ for i in range(iterations):
     
 ```
 
-Now it is time to expriement a bit. You started with our suggestion above, 1000 iterations and learning rate of 0.02. Try different values, for example 2000 iterations, a learning rate of 0.002, etc. As you experiment, you should find some values where you see that the cost keeps going down all the way to the last iteration (okay, likely faster at the beginning than at the end). If the cost goes down then back up, your learning rate is to high, and you bounced above the minimum. Try a slammer learning rate. At the same time, if the change of cost kind of flattens (not much difference anymore between iterations0, then you may have too many iterations. On the other hand, if the cost keeps going down quite much in the last iterations, then you need more iterations... it is a bit of a trial and error game here, and there is no absolute good response, only values that you will end up be satisfied with.
+Now it is time to expriement a bit. You started with our suggestion above, 1000 iterations and learning rate of 0.02. Try different values, for example 2000 iterations, a learning rate of 0.002, etc. As you experiment, you should find some values where you see that the cost keeps going down all the way to the last iteration (okay, likely faster at the beginning than at the end). If the cost goes down then back up, your learning rate is too high, and you bounced above the minimum. Try a smaller learning rate. At the same time, if the change of cost kind of flattens (not much difference anymore between iterations), then you may have too many iterations. On the other hand, if the cost keeps going down quite much in the last iterations, then you need more iterations... it is a bit of a trial and error game here, and there is no absolute good response, only values that you will end up be satisfied with.
 
 Once you have the numbers you like, let's plot our data again, and overlay there the line you found. There are a few ways to do this. As our x values range from 5 to 25, we can just compute two points on the line, one at x=5.5 and the other at x=24.5 (we compute the predicted y for each, now that we have our thetas). The below code is ugly, but the goal is to show you what happens in a simple way, even if you do not master python:
 
@@ -171,7 +171,7 @@ plt.ylabel("Pressure (Prod)")
 plt.plot(P1, P2)
 ```
 
-This was great fun, and you can see that you can use manual gradient descent if you have to. Of course, automating the whole thing would be nice, and this is what scikit learn libraries are for. As we are looking for a line, let's import the linear model from scikit learn, adn then let's create a linear regression model (we call this an object).
+This was great fun, and you can see that you can use manual gradient descent if you have to. Of course, automating the whole thing would be nice, and this is what scikit learn libraries are for. As we are looking for a line, let's import the linear model from scikit learn, and then let's create a linear regression model (we call this an object).
 
 ```shell
 from sklearn import linear_model
@@ -179,7 +179,7 @@ from sklearn import linear_model
 reg = linear_model.LinearRegression()
 ```
 
-Scikit learn has many models. By calling LinearRegression(), we are loading the model that uses least squares, which is the technique we ran manually above. But there are other modesl. Take a bit of time to explore [on their site](https://scikit-learn.org/stable/supervised_learning.html) and see the other models that you could use.
+Scikit learn has many models. By calling LinearRegression(), we are loading the model that uses least squares, which is the technique we ran manually above. But there are other models. Take a bit of time to explore [on their site](https://scikit-learn.org/stable/supervised_learning.html) and see the other models that you could use.
 
 Once we have the model, it knows what we want to do: if we have x and y as above, it needs to find theta0 and theta1 with the same technique we used above. So the only thing we need to ask is to do just that, which is called "find the best fit for theta1 and theta0, given this x and this y". This is done in a single line:
 
@@ -216,9 +216,9 @@ plt.plot(P3, P4, color = 'green')
 
 ```
 
-Compare this line to yours. Her again, it should be fairly close in this simple example.
+Compare this line to yours. Here again, it should be fairly close in this simple example.
 
-last, now that you have a theta0 and theta1, you can run inferences. In other words, if you get a particular Por (x) value, you should be able to predict the most likley Prod (y) value. Of course, you can do it by have with theta0 + theta1 * x, but the scikit learn library has integrated the function, called predict. For example:
+Last, now that you have a theta0 and theta1, you can run inferences. In other words, if you get a particular Por (x) value, you should be able to predict the most likley Prod (y) value. Of course, you can do it by have with theta0 + theta1 * x, but the scikit learn library has integrated the function, called predict. For example:
 
 ```shell
 New_Por = 8
