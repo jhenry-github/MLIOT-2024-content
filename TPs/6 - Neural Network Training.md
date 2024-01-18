@@ -1,10 +1,10 @@
 # Neural Network Tuning
 
-Neural networks are at the heart of many machine learning systems, and Espressif makes it clear in their demos. Being able to push a neural network model to the ESTp-EYE is important, but it is also important to be able to understand the structure of the model, and be able to create your own and fine tune it. In this exercise, you will load a well-known dataset, and will use tensorflow to train the model, then fine tune it.
+Neural networks are at the heart of many machine learning systems, and Espressif makes it clear in their demos. Being able to push a neural network model to the ESP-EYE is important, but it is also important to be able to understand the structure of the model, and be able to create your own and fine tune it. In this exercise, you will load a well-known dataset, and will use tensorflow to train the model, then fine tune it.
 
 The Cifar-10 dataset is a large collection of images (60,000 images, all in color, of size 32x32), that is typically used to train a classifier (to recognize 10 different classes of images). You can find it [here](https://www.cs.toronto.edu/~kriz/cifar.html). It is a subset of cifar-100, that contains ten times more images, (and cifar-100 is a subset of the full dataset, of 80 million images).
 
-Cifar-10 is so well-known, that many frameworks integrate it directly it is the case for tensorflow. So the first step is to start a new Jupyter notebook, in your tensorflow environment, then load the libraris we need, along with the dataset. As you may remember, tensorflow uses Keras as a wrapper to define the structure of the network. We also load the to_categorical library, which allows us to create categories as numbers (for example, an object of category 3 in a system with 4 categories is automatically represented by this library as [0, 0, 1, 0]):
+Cifar-10 is so well-known that many frameworks integrate it directly, it is the case for tensorflow. So the first step is to start a new Jupyter notebook, in your tensorflow environment, then load the libraries we need, along with the dataset. As you may remember, tensorflow uses Keras as a wrapper to define the structure of the network. We also load the to_categorical library, which allows us to create categories as numbers (for example, an object of category 3 in a system with 4 categories is automatically represented by this library as [0, 0, 1, 0]):
 
 ```shell
 # Import necessary libraries
@@ -32,7 +32,7 @@ y_train
 
 ```
 
-Once we have our data in memory, we split into train and validation set. We use the first 40K entries for the training, and all entries above 40K (i.e., the last 20K) for the validation:
+Once we have our data in memory, we split into train and validation set. We use the first 40000 entries for the training, and all entries above 40000 (i.e., the last 20000) for the validation:
 
 
 ```shell
@@ -42,8 +42,8 @@ y_train, y_val = y_train[:40000], y_train[40000:]
 
 ```
 
-The next step is to build the neural network. We want to use a CNN (because we work on images and CNNs are efficient for this type of data). As each image is 32x32, the input is going to be 32x32, in RGB (so one score [0,255], normalized to [0,1], for each of the 3 tones). We will then inject them into a first convolutional layer (with a ReLu activation function to eliminate negative scores) that will look at blocks of 3x3 pixesl, the layer has 32 units.
-Then, we will inject the otuput into a pooling layer, that reduces the score to 2x2 blocks, thus making it smaller (as you may remember, we care to know if the feature of a target image, for example an X or a O, is here or not, we do not care where the feature is, so concluding on the rpesence of a feature in a zone is sufficient). We repeat the process, injecting he result into another convolutional layer, this time of 64 units (but still 3x3), with a ReLu activation function, then a max pooling layer, of 2x2 again. 
+The next step is to build the neural network. We want to use a CNN (because we work on images and CNNs are efficient for this type of data). As each image is 32x32, the input is going to be 32x32, in RGB (so one score [0,255], normalized to [0,1], for each of the 3 tones). We will then inject them into a first convolutional layer (with a ReLu activation function to eliminate negative scores) that will look at blocks of 3x3 pixels, the layer has 32 units.
+Then, we will inject the otuput into a pooling layer, that reduces the score to 2x2 blocks, thus making it smaller (as you may remember, we care to know if the feature of a target image, for example an X or a O, is here or not, we do not care where the feature is, so concluding on the presence of a feature in a zone is sufficient). We repeat the process, injecting the result into another convolutional layer, this time of 64 units (but still 3x3), with a ReLu activation function, then a max pooling layer, of 2x2 again. 
 
 Then we convert our scores for each feature into a single vector (we 'flatten'). Finally, we inject this score vector for each image into a last convolutional layer, with 64 units and a ReLu activation function, and ask the system to output a class score with 10 classes:
 
@@ -61,9 +61,9 @@ model = tf.keras.models.Sequential([
 ])
 ```
 
-Why did we choose this structure? That's an excellent question! And that is also one goal of this lab. Someone thought about the structure of the dataset, tried a few things, and concluded that this structure would work. But you cannot make this conclusion without trying a few things. So let's first compile the model, then we'll try to refine it. We use the [adam optimizer](https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adam) (Adaptive Moment Estimation). It is a comon optimizer for neural entworks, because it can pick variable learning rates (i.e., slow down as it gets closer to 0, so as not to miss the lowest point), and also uses two techniques for the error estimation, to be fast while avoiding the local minima. You can learn about its arguments in Keras [here](https://keras.io/api/optimizers/adam/).
+Why did we choose this structure? That's an excellent question! And that is also one goal of this lab. Someone thought about the structure of the dataset, tried a few things, and concluded that this structure would work. But you cannot make this conclusion without trying a few things. So let's first compile the model, then we'll try to refine it. We use the [adam optimizer](https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adam) (Adaptive Moment Estimation). It is a comon optimizer for neural networks, because it can pick variable learning rates (i.e., slow down as it gets closer to 0, so as not to miss the lowest point), and also uses two techniques for the error estimation, to be fast while avoiding the local minima. You can learn about its arguments in Keras [here](https://keras.io/api/optimizers/adam/).
 
-Once we heve defined how the model should be compiled (i.e. what can of equation or algorithm we use in the training), we just call our usual function 'fit' to train it:
+Once we have defined how the model should be compiled (i.e. what can of equation or algorithm we use in the training), we just call our usual function 'fit' to train it:
 
 
 ```shell
@@ -79,7 +79,7 @@ history = model.fit(x_train, y_train, epochs=10, validation_data=(x_val, y_val))
 
 And as usual.... that's it. Depending on your machine, it may have taken a few minutes to run. Now it is time to see how good the prediction is (again, we kept some data for this type of validation, so we can measure how coherent our model is with the dataset we use).
 
-One great command with Keras in tensorflow is 'evaluate', which, as its name indicates, can give you performance scores on your model. We get the loss, which is the cost of the final model, and its accuracy. Remember, accuracy is supposed to be high if your model works. In general [disclaimer: this depends on the case at hand yada yada] you do not wan an acuracy below 80% to 90%. 80% is low, anything below 70% coudl well be random. You also do not want something too close to 100% in real life (except if it is a training exercise like this one), because it would mean that your model is very biased: as soon as you get new data, your score will drop.
+One great command with Keras in tensorflow is 'evaluate', which, as its name indicates, can give you performance scores on your model. We get the loss, which is the cost of the final model, and its accuracy. Remember, accuracy is supposed to be high if your model works. In general [disclaimer: this depends on the case at hand yada yada] you do not want an acuracy below 80% to 90%. 80% is low, anything below 70% coudl well be random. You also do not want something too close to 100% in real life (except if it is a training exercise like this one), because it would mean that your model is very biased: as soon as you get new data, your score will drop.
 
 We then plot the accuracy we got at each stage of the training (accuracy should improve with each epoch), and the accuracy we get on each segment of the validation dataset.
 
@@ -120,7 +120,7 @@ history = model.fit(x_train, y_train, epochs=10, validation_data=(x_val, y_val))
 
 ## Adjusting the number of epochs
 
-Apart from the learning rate, you can also change the number of epochs. In each epoch, the systm picks a number of images for its training. Changing that number (called the bacth size) can also help. If you have more epochs, you spend more time training, so your learning is more accuract (but at the cost of training time). If you use more images in each batch, you have more comparison points, so you may need less epochs. It is worht trying a few combinations. Here are two examples:
+Apart from the learning rate, you can also change the number of epochs. In each epoch, the system picks a number of images for its training. Changing that number (called the batch size) can also help. If you have more epochs, you spend more time training, so your learning is more accurate (but at the cost of training time). If you use more images in each batch, you have more comparison points, so you may need less epochs. It is worth trying a few combinations. Here are two examples:
 
 ```shell
 # Experiment with different batch sizes and epochs
@@ -130,12 +130,12 @@ history = model.fit(x_train, y_train, batch_size=64, epochs=15, validation_data=
 
 ```
 
-Try these two anda fe others, then re-compute the performances. Can you find something better than the defaults?
+Try these two and a few others, then re-compute the performances. Can you find something better than the defaults?
 
 
 ## Using a different optimizer
 
-We used the adam optimizer. It is a classic, but not the only game in town, and the [Keras website](https://keras.io/api/optimizers/) gives you the most common ones. If you want to work with AIML, it is a good idea to read a bit about them, you should speak optimizers as well as you speak English. We can try two other very efficient optimzers. To use something else than adam, replace the model.compile section of your code. For example:
+We used the adam optimizer. It is a classic, but not the only game in town, and the [Keras website](https://keras.io/api/optimizers/) gives you the most common ones. If you want to work with AIML, it is a good idea to read a bit about them, you should speak optimizers as well as you speak English. We can try two other very efficient optimizers. To use something else than adam, replace the model.compile section of your code. For example:
 
 ```shell
 # Using SGD optimizer
@@ -157,7 +157,7 @@ model.compile(optimizer='rmsprop',
 
 ## Using a different activation function
 
-We used a convolution layer witha  ReLu, but sometimes it is more efficient to insert a different activation function, like tanh. You would not replace all the ReLus with tanha, but you could replace one of them. I would look like this:
+We used a convolution layer witha  ReLu, but sometimes it is more efficient to insert a different activation function, like tanh. You would not replace all the ReLus with tanh, but you could replace one of them. I would look like this:
 
 
 ```shell
@@ -173,7 +173,7 @@ model = tf.keras.models.Sequential([
 
 ## Using a different network architecture
 
-Changing the architecture of the network, like the number of layers, the number of neurons in each layer, etc., can have a significant impact. Try a few variations. With the learining rate and epoch/batch, this is my goto technique. For example (but try a few other variations and see if you can find somethign that works better):
+Changing the architecture of the network, like the number of layers, the number of neurons in each layer, etc., can have a significant impact. Try a few variations. With the learning rate and epoch/batch, this is my goto technique. For example (but try a few other variations and see if you can find something that works better):
 
 ```shell
 # Adding more layers
@@ -217,7 +217,7 @@ model = tf.keras.models.Sequential([
 
 ## Using a pre-trained model
 
-Another commonly used approach is to use a pre-trained model. This is a CNN that other people have trained, and that you retrain on your data. One advantage of this technique is that the model you reuse may have been trained on a very large set of images, so it may have learned a large set of features (from a large set of images). Here, you use a technique called transfer learning, where you then used this trained model on your data, essentially asking it ti apply its knowledge of features, to recognize features in your dataset. This is often faster than training on a larger dataset (ore training with many more epochs):
+Another commonly used approach is to use a pre-trained model. This is a CNN that other people have trained, and that you retrain on your data. One advantage of this technique is that the model you reuse may have been trained on a very large set of images, so it may have learned a large set of features (from a large set of images). Here, you use a technique called transfer learning, where you use this trained model on your data, essentially asking it to apply its knowledge of features, to recognize features in your dataset. This is often faster than training yourself on a larger dataset (or training with many more epochs):
 
 ```shell
 # Example: Using a pre-trained model (VGG16)
@@ -245,7 +245,7 @@ Which technique, which combination gave you the best results?
 
 ## Using an automatic tuner
 
-Now, it is true that there are some tools to help you make that optimizaiton. This manual search you ran, a tool like keras tuner that can run the same type of search automatically. I give you this tool last, because using it is the difference between fixing your car (above) and having someone fixe your car (keras tuner): in this second case, you haven't learned anything about the internals of your learning machine, you just learned to copy/paste (but you knew how to do that before starting the exercise).
+Now, it is true that there are some tools to help you make that optimizaiton. This manual search you ran, a tool like keras tuner that can run the same type of search automatically. I give you this tool last, because using it is the difference between fixing your car (above) and having someone fix your car (keras tuner): in this second case, you haven't learned anything about the internals of your learning machine, you just learned to copy/paste (but you knew how to do that before starting the exercise).
 
 
 ```shell
@@ -286,7 +286,7 @@ def build_model(hp):
     return model
 ```
 
-Then, you launch keras tuner from this series of bricks to find the best combination of these bricks (the best structure, the best optimizers, the best learning rate, epoch, bacth size):
+Then, you launch keras tuner from this series of bricks to find the best combination of these bricks (the best structure, the best optimizers, the best learning rate, epoch, batch size):
 
 
 ```shell
