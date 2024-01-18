@@ -117,7 +117,7 @@ history = model.fit(x_train, y_train, epochs=10, validation_data=(x_val, y_val))
 
 ```
 
-  # Adjusting the number of epochs
+  ## Adjusting the number of epochs
 
 Apart from the learning rate, you can also change the number of epochs. In each epoch, the systm picks a number of images for its training. Changing that number (called the bacth size) can also help. If you have more epochs, you spend more time training, so your learning is more accuract (but at the cost of training time). If you use more images in each batch, you have more comparison points, so you may need less epochs. It is worht trying a few combinations. Here are two examples:
 
@@ -131,7 +131,7 @@ history = model.fit(x_train, y_train, batch_size=64, epochs=15, validation_data=
 
 Try these two anda fe others, then re-compute the performances. Can you find something better than the defaults?
 
-  # Adjusting a different optimizer
+ ## Using a different optimizer
 
 We used the adam optimizer. It is a classic, but not the only game in town, and the [Keras website](https://keras.io/api/optimizers/) gives you the most common ones. If you want to work with AIML, it is a good idea to read a bit about them, you should speak optimizers as well as you speak English. We can try two other very efficient optimzers. To use something else than adam, replace the model.compile section of your code. For example:
 
@@ -153,7 +153,7 @@ model.compile(optimizer='rmsprop',
 ```
 
 
-  # Using a different activation function
+  ## Using a different activation function
 
 We used a convolution layer witha  ReLu, but sometimes it is more efficient to insert a different activation function, like tanh. You would not replace all the ReLus with tanha, but you could replace one of them. I would look like this:
 
@@ -168,7 +168,7 @@ model = tf.keras.models.Sequential([
 
 ```
 
-  # Using a different network architecture
+  ## Using a different network architecture
 
 Changing the architecture of the network, like the number of layers, the number of neurons in each layer, etc., can have a significant impact. Try a few variations. With the learining rate and epoch/batch, this is my goto technique. For example (but try a few other variations and see if you can find somethign that works better):
 
@@ -191,7 +191,7 @@ model = tf.keras.models.Sequential([
 
 
   
-  # Data augmentation
+  ## Data augmentation
 
 Data augmentation can significantly improve the performance of the model, especially in image-related tasks. With this technique, you create variations of your images (with added random noise), and the model trains on the real and the added images. In most cases, this technique helps the model be more efficient in recognizing images in the test set, because it was trained on more images, and on images that were not very good (noisy):
 
@@ -212,7 +212,7 @@ model = tf.keras.models.Sequential([
 
 ```
   
-  # Using a pre-trained model
+  ## Using a pre-trained model
 
 Another commonly used approach is to use a pre-trained model. This is a CNN that other people have trained, and that you retrain on your data. One advantage of this technique is that the model you reuse may have been trained on a very large set of images, so it may have learned a large set of features (from a large set of images). Here, you use a technique called transfer learning, where you then used this trained model on your data, essentially asking it ti apply its knowledge of features, to recognize features in your dataset. This is often faster than training on a larger dataset (ore training with many more epochs):
 
@@ -239,6 +239,8 @@ history = model.fit(x_train, y_train, epochs=10, validation_data=(x_val, y_val))
 ```
 
 Which technique, which combination gave you the best results?
+
+## Using an automatic tuner
 
 Now, it is true that there are some tools to help you make that optimizaiton. This manual search you ran, a tool like keras tuner that can run the same type of search automatically. I give you this tool last, because using it is the difference between fixing your car (above) and having someone fixe your car (keras tuner): in this second case, you haven't learned anything about the internals of your learning machine, you just learned to copy/paste (but you knew how to do that before starting the exercise).
 
