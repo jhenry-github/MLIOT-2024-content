@@ -101,7 +101,7 @@ plt.legend(loc='lower right')
 
 If your code is like mine, performances may be only average. Let us try to improve things. 
 
-  # Adjusting the learning rate
+## Adjusting the learning rate
 
 One thing you can try to play with is the learning rate. This is how you would change it. Try a few values (0.0001 is just an example, you can try to add or remove zeros, change the numbers etc.), retrain and plot, and see if you can find a value that gives a better result:
 
@@ -117,7 +117,7 @@ history = model.fit(x_train, y_train, epochs=10, validation_data=(x_val, y_val))
 
 ```
 
-  ## Adjusting the number of epochs
+## Adjusting the number of epochs
 
 Apart from the learning rate, you can also change the number of epochs. In each epoch, the systm picks a number of images for its training. Changing that number (called the bacth size) can also help. If you have more epochs, you spend more time training, so your learning is more accuract (but at the cost of training time). If you use more images in each batch, you have more comparison points, so you may need less epochs. It is worht trying a few combinations. Here are two examples:
 
