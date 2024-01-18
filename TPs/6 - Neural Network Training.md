@@ -101,6 +101,7 @@ plt.legend(loc='lower right')
 
 If your code is like mine, performances may be only average. Let us try to improve things. 
 
+
 ## Adjusting the learning rate
 
 One thing you can try to play with is the learning rate. This is how you would change it. Try a few values (0.0001 is just an example, you can try to add or remove zeros, change the numbers etc.), retrain and plot, and see if you can find a value that gives a better result:
@@ -131,7 +132,8 @@ history = model.fit(x_train, y_train, batch_size=64, epochs=15, validation_data=
 
 Try these two anda fe others, then re-compute the performances. Can you find something better than the defaults?
 
- ## Using a different optimizer
+
+## Using a different optimizer
 
 We used the adam optimizer. It is a classic, but not the only game in town, and the [Keras website](https://keras.io/api/optimizers/) gives you the most common ones. If you want to work with AIML, it is a good idea to read a bit about them, you should speak optimizers as well as you speak English. We can try two other very efficient optimzers. To use something else than adam, replace the model.compile section of your code. For example:
 
@@ -153,7 +155,7 @@ model.compile(optimizer='rmsprop',
 ```
 
 
-  ## Using a different activation function
+## Using a different activation function
 
 We used a convolution layer witha  ReLu, but sometimes it is more efficient to insert a different activation function, like tanh. You would not replace all the ReLus with tanha, but you could replace one of them. I would look like this:
 
@@ -168,7 +170,8 @@ model = tf.keras.models.Sequential([
 
 ```
 
-  ## Using a different network architecture
+
+## Using a different network architecture
 
 Changing the architecture of the network, like the number of layers, the number of neurons in each layer, etc., can have a significant impact. Try a few variations. With the learining rate and epoch/batch, this is my goto technique. For example (but try a few other variations and see if you can find somethign that works better):
 
@@ -190,8 +193,7 @@ model = tf.keras.models.Sequential([
 ```
 
 
-  
-  ## Data augmentation
+## Data augmentation
 
 Data augmentation can significantly improve the performance of the model, especially in image-related tasks. With this technique, you create variations of your images (with added random noise), and the model trains on the real and the added images. In most cases, this technique helps the model be more efficient in recognizing images in the test set, because it was trained on more images, and on images that were not very good (noisy):
 
@@ -212,7 +214,8 @@ model = tf.keras.models.Sequential([
 
 ```
   
-  ## Using a pre-trained model
+
+## Using a pre-trained model
 
 Another commonly used approach is to use a pre-trained model. This is a CNN that other people have trained, and that you retrain on your data. One advantage of this technique is that the model you reuse may have been trained on a very large set of images, so it may have learned a large set of features (from a large set of images). Here, you use a technique called transfer learning, where you then used this trained model on your data, essentially asking it ti apply its knowledge of features, to recognize features in your dataset. This is often faster than training on a larger dataset (ore training with many more epochs):
 
